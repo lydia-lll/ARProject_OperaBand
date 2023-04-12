@@ -17,24 +17,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var faceLabel: UILabel!
     @IBOutlet weak var labelView: UIView!
     var analysis = ""
-    var player: AVAudioPlayer? = nil
+    var DLplayer: AVAudioPlayer? = nil
     var reportChange: (() -> Void)!
     var smile = false
     var play = false
     
-    let urlSounds = [
-        "https://www.youraccompanist.com/images/stories/Reference%20Scales_On%20A%20Flat-G%20Sharp.mp3",
-        "https://www.youraccompanist.com/images/stories/Reference%20Scales_Pentatonic%20on%20F%20Sharp.mp3",
-        "https://www.youraccompanist.com/images/stories/Reference%20Scales_Chromatic%20Scale%20On%20F%20Sharp.mp3",
-    ]
+    let bundleAudio = [
+        "DLlowLong.wav",
+        "DLhighLong.wav",
+        "DLlowlow.wav"
+    ];
     
-    func loadUrlAudio(_ urlString:String) -> AVAudioPlayer? {
-        let url = URL(string: urlString)
+    func loadBundleAudio(_ fileName:String) -> AVAudioPlayer? {
+        let path = Bundle.main.path(forResource: fileName, ofType:nil)!
+        let url = URL(fileURLWithPath: path)
         do {
-            let data = try Data(contentsOf: url!)
-            return try AVAudioPlayer(data: data)
+            return try AVAudioPlayer(contentsOf: url)
         } catch {
-            print("loadUrlSound error", error)
+            print("loadBundleAudio error", error)
         }
         return nil
     }
@@ -112,7 +112,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let cheekPuff = anchor.blendShapes[.cheekPuff]
         let tongue = anchor.blendShapes[.tongueOut]
         let leftEyeBlink = anchor.blendShapes[.eyeBlinkLeft]
+        
         let rightEyeBlink = anchor.blendShapes[.eyeBlinkRight]
+        
+        let cheekSquintLeft = anchor.blendShapes[.cheekSquintLeft]
+        let cheekSquintRight = anchor.blendShapes[.cheekSquintRight]
+        let jawOpen = anchor.blendShapes[.jawOpen]
+        
+        let browDownLeft = anchor.blendShapes[.browDownLeft]
+        let browDownRight = anchor.blendShapes[.browDownRight]
+        let browInnerUp = anchor.blendShapes[.browInnerUp]
+        let browOuterUpLeft = anchor.blendShapes[.browOuterUpLeft]
+        let browOuterUpRight = anchor.blendShapes[.browOuterUpRight]
+        
+        let noseSneerLeft = anchor.blendShapes[.noseSneerLeft]
+        let noseSneerRight = anchor.blendShapes[.noseSneerRight]
         self.analysis = ""
         
         if ((smileLeft?.decimalValue ?? 0.0) + (smileRight?.decimalValue ?? 0.0)) > 0.9 {
@@ -133,20 +147,56 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         if leftEyeBlink?.decimalValue ?? 0.0 > 0.1{
             self.analysis += "Left Eye Blink"
         }
+        
+        if rightEyeBlink?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "Right Eye Blink"
+        }
+        
+        if cheekSquintLeft?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "cheekSquintLeft"
+        }
+        if cheekSquintRight?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "cheekSquintRight"
+        }
+        if jawOpen?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "jawOpen"
+        }
+        if browDownLeft?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "browDownLeft: \(String(describing: browDownLeft?.decimalValue))"
+        }
+        if browDownRight?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "browDownRight: \(String(describing: browDownRight?.decimalValue))"
+        }
+        if browInnerUp?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "browInnerUp: \(String(describing: browInnerUp?.decimalValue))"
+        }
+        if browOuterUpLeft?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "browOuterUpLeft: \(String(describing: browOuterUpLeft?.decimalValue))"
+        }
+        if browOuterUpRight?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "browOuterUpRight: \(String(describing: browOuterUpRight?.decimalValue))"
+        }
+        
+        if noseSneerLeft?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "noseSneerLeft: \(String(describing: noseSneerLeft?.decimalValue))"
+        }
+        if noseSneerRight?.decimalValue ?? 0.0 > 0.1{
+            self.analysis += "noseSneerRight: \(String(describing: noseSneerRight?.decimalValue))"
+        }
     }
     
     func playAudio(){
         if (smile && !play){
-            self.player = loadUrlAudio(urlSounds[0])
-            print("player", player as Any)
+            self.DLplayer = loadBundleAudio(bundleAudio[0])
+            print("DLplayer", DLplayer as Any)
             // Loop indefinitely
-            self.player?.numberOfLoops = 0
-            self.player?.play()
+            self.DLplayer?.numberOfLoops = 0
+            self.DLplayer?.play()
             self.play = true
-            print(player?.isPlaying)
+            print(DLplayer?.isPlaying)
             print("it should play sth")
         }
-        if(player?.isPlaying == false){
+        if(DLplayer?.isPlaying == false){
             self.play = false
             self.smile = false
             print("stopped")

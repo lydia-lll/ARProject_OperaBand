@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var analysis: String = ""
+    
 //    @State var smile: Bool = false
     
     var body: some View {
