@@ -21,6 +21,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var reportChange: (() -> Void)!
     var smile = false
     var play = false
+    var DLAudioModel: AudioModel = nil
     
     let bundleAudio = [
         "DLlowLong.wav",
@@ -107,16 +108,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func expression(anchor: ARFaceAnchor) {
-        let smileLeft = anchor.blendShapes[.mouthSmileLeft]
-        let smileRight = anchor.blendShapes[.mouthSmileRight]
-        let cheekPuff = anchor.blendShapes[.cheekPuff]
-        let tongue = anchor.blendShapes[.tongueOut]
         let leftEyeBlink = anchor.blendShapes[.eyeBlinkLeft]
-        
         let rightEyeBlink = anchor.blendShapes[.eyeBlinkRight]
         
         let cheekSquintLeft = anchor.blendShapes[.cheekSquintLeft]
         let cheekSquintRight = anchor.blendShapes[.cheekSquintRight]
+        
         let jawOpen = anchor.blendShapes[.jawOpen]
         
         let browDownLeft = anchor.blendShapes[.browDownLeft]
@@ -127,13 +124,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         let noseSneerLeft = anchor.blendShapes[.noseSneerLeft]
         let noseSneerRight = anchor.blendShapes[.noseSneerRight]
+        
         self.analysis = ""
         
-        if ((smileLeft?.decimalValue ?? 0.0) + (smileRight?.decimalValue ?? 0.0)) > 0.9 {
-            self.analysis += "You are smiling. "
+        if ((browDownLeft?.decimalValue ?? 0.0) + (browDownRight?.decimalValue ?? 0.0)) > 0.9 {
+            self.analysis += "Your borws are down. "
             self.smile = true;
-//        }else{
-//            self.smile = false;
+            let Audio
         }
         
         if cheekPuff?.decimalValue ?? 0.0 > 0.1 {

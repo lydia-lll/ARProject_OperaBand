@@ -10,6 +10,8 @@
 		0BB3E11629E60ABA003914A7 /* DLlowLong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E11529E60ABA003914A7 /* DLlowLong.wav */; };
 		0BB3E11829E60AD0003914A7 /* DLhighLong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E11729E60AD0003914A7 /* DLhighLong.wav */; };
 		0BB3E11A29E60ADC003914A7 /* DLlowlow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E11929E60ADC003914A7 /* DLlowlow.wav */; };
+		0BB3E11C29E76871003914A7 /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E11B29E76871003914A7 /* AudioModel.swift */; };
+		0BB3E11E29E771DD003914A7 /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */; };
 		8B7D4E392221CA4800E0E448 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D4E382221CA4800E0E448 /* ViewController.swift */; };
 		8B7D4E3C2221CA4800E0E448 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B7D4E3A2221CA4800E0E448 /* Main.storyboard */; };
 		8B7D4E3E2221CA4F00E0E448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B7D4E3D2221CA4F00E0E448 /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 		0BB3E11529E60ABA003914A7 /* DLlowLong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DLlowLong.wav; sourceTree = "<group>"; };
 		0BB3E11729E60AD0003914A7 /* DLhighLong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DLhighLong.wav; sourceTree = "<group>"; };
 		0BB3E11929E60ADC003914A7 /* DLlowlow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DLlowlow.wav; sourceTree = "<group>"; };
+		0BB3E11B29E76871003914A7 /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
+		0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		8B7D4E312221CA4800E0E448 /* FaceMesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceMesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B7D4E382221CA4800E0E448 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B7D4E3B2221CA4800E0E448 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,6 +86,8 @@
 				8B7D4E3D2221CA4F00E0E448 /* Assets.xcassets */,
 				8B7D4E3F2221CA4F00E0E448 /* LaunchScreen.storyboard */,
 				8B7D4E422221CA4F00E0E448 /* Info.plist */,
+				0BB3E11B29E76871003914A7 /* AudioModel.swift */,
+				0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */,
 			);
 			path = FaceMesh;
 			sourceTree = "<group>";
@@ -161,8 +167,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BB3E11E29E771DD003914A7 /* AudioPlayerModel.swift in Sources */,
 				ABB7C42029AF54F500711661 /* ContentView.swift in Sources */,
 				8B7D4E392221CA4800E0E448 /* ViewController.swift in Sources */,
+				0BB3E11C29E76871003914A7 /* AudioModel.swift in Sources */,
 				ABB7C42129AF54F500711661 /* FaceMeshApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
