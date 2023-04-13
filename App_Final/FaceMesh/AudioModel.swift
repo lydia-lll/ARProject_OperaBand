@@ -22,8 +22,16 @@ import Foundation
 //}
 class AudioModel{
     let DLbundleAudio = [
-        "DLlowLong.wav",
-        "DLhighLong.wav",
-        "DLlowlow.wav"
+        "DLlowShort.wav",
+        "DLhighShort.wav",
+        "DLlow.wav"
+    ];
+    let BGbundleAudio = [
+        "banGu.wav",
+        "Gu.wav"
+    ];
+    let BLbundleAudio = [
+        "xiaoLuo.wav",
+        "naoBo.wav"
     ];
 }

@@ -17,31 +17,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet weak var faceLabel: UILabel!
     @IBOutlet weak var labelView: UIView!
     var analysis = ""
-    var DLplayer: AVAudioPlayer? = nil
     var reportChange: (() -> Void)!
-    var browDown = false
-    var browUp = false
-    var play = false
-//    var DLAudioModel: AudioModel = nil
+    
     var audioModel = AudioModel()
     var DLAudioPlayer: AudioPlayerModel?
+    var BGAudioPlayer: AudioPlayerModel?
+    var XLAudioPlayer: AudioPlayerModel?
+    var NBAudioPlayer: AudioPlayerModel?
     
-    let bundleAudio = [
-        "DLlowLong.wav",
-        "DLhighLong.wav",
-        "DLlowlow.wav"
-    ];
-    
-    func loadBundleAudio(_ fileName:String) -> AVAudioPlayer? {
-        let path = Bundle.main.path(forResource: fileName, ofType:nil)!
-        let url = URL(fileURLWithPath: path)
-        do {
-            return try AVAudioPlayer(contentsOf: url)
-        } catch {
-            print("loadBundleAudio error", error)
-        }
-        return nil
-    }
+    var eyeDown = false
+    var eyeUp = false
+    var browDown = false
+    var browUp = false
+    var smile = false
+    var cheekPuff = false
     
     override func viewDidLoad() {
         print("ViewController viewDidLoad")
@@ -59,7 +48,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Disable UIKit label in Main.storyboard
         labelView.isHidden = true
         
+        // initialize audio players
+        NBAudioPlayer = AudioPlayerModel(soundAssets: audioModel.BLbundleAudio, pitch: 0, volume: 0, speed: 0)
+        XLAudioPlayer = AudioPlayerModel(soundAssets: audioModel.BLbundleAudio, pitch: 0, volume: 0, speed: 0)
         DLAudioPlayer = AudioPlayerModel(soundAssets: audioModel.DLbundleAudio, pitch: 0, volume: 0, speed: 0)
+        BGAudioPlayer = AudioPlayerModel(soundAssets: audioModel.BGbundleAudio, pitch: 0, volume: 1, speed: 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -99,16 +92,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
         if let faceAnchor = anchor as? ARFaceAnchor, let faceGeometry = node.geometry as? ARSCNFaceGeometry {
             faceGeometry.update(from: faceAnchor.geometry)
+            
+            //detect facial expressions
             expression(anchor: faceAnchor)
-//            playAudio()
-            if(browDown){
-                DLAudioPlayer?.playAudio()
-                browDown = false
-            }
-            if(browUp){
-                DLAudioPlayer?.playAudio()
-                browUp = false
-            }
+            //map expressions to sounds
+            audioPlay()
+            
             
             DispatchQueue.main.async {
                 // Disable UIKit label in Main.storyboard
@@ -121,24 +110,35 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     func expression(anchor: ARFaceAnchor) {
-        let leftEyeBlink = anchor.blendShapes[.eyeBlinkLeft]
-        let rightEyeBlink = anchor.blendShapes[.eyeBlinkRight]
+        let leftEyeDown = anchor.blendShapes[.eyeLookDownLeft]
+        let rightEyeDown = anchor.blendShapes[.eyeLookDownRight]
+        let leftEyeUp = anchor.blendShapes[.eyeLookUpLeft]
+        let rightEyeUp = anchor.blendShapes[.eyeLookUpRight]
         
-        let cheekSquintLeft = anchor.blendShapes[.cheekSquintLeft]
-        let cheekSquintRight = anchor.blendShapes[.cheekSquintRight]
+        let smileLeft = anchor.blendShapes[.mouthSmileLeft]
+        let smileRight = anchor.blendShapes[.mouthSmileRight]
+        let cheekPuff = anchor.blendShapes[.cheekPuff]
         
         let jawOpen = anchor.blendShapes[.jawOpen]
         
         let browDownLeft = anchor.blendShapes[.browDownLeft]
         let browDownRight = anchor.blendShapes[.browDownRight]
         let browInnerUp = anchor.blendShapes[.browInnerUp]
-        let browOuterUpLeft = anchor.blendShapes[.browOuterUpLeft]
-        let browOuterUpRight = anchor.blendShapes[.browOuterUpRight]
-        
-        let noseSneerLeft = anchor.blendShapes[.noseSneerLeft]
-        let noseSneerRight = anchor.blendShapes[.noseSneerRight]
         
         self.analysis = ""
+        
+        if ((leftEyeDown?.decimalValue ?? 0.0) + (rightEyeDown?.decimalValue ?? 0.0)) > 0.82 {
+            self.analysis += "Eye Down"
+            self.XLAudioPlayer?.volume = (leftEyeDown?.floatValue ?? 0.0) + (rightEyeDown?.floatValue ?? 0.0) - 0.82
+            self.XLAudioPlayer?.soundIndex = 0
+            self.eyeDown = true
+        }
+        if ((leftEyeUp?.decimalValue ?? 0.0) + (rightEyeUp?.decimalValue ?? 0.0)) > 0.82 {
+            self.analysis += "Eye Up"
+            self.NBAudioPlayer?.volume = (leftEyeUp?.floatValue ?? 0.0) + (rightEyeUp?.floatValue ?? 0.0) - 0.82
+            self.NBAudioPlayer?.soundIndex = 1
+            self.eyeUp = true
+        }
         
         if ((browDownLeft?.decimalValue ?? 0.0) + (browDownRight?.decimalValue ?? 0.0)) > 0.82 {
             self.analysis += "Your borws are down. "
@@ -154,80 +154,58 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 self.DLAudioPlayer?.volume = (browInnerUp?.floatValue ?? 0.0) - 0.17
                 self.browUp = true;
             }else{
-//                let vol = ((browInnerUp?.floatValue ?? 0.0) - 0.08 > 0) ? (browInnerUp?.floatValue ?? 0.0) - 0.08 : 0
-                self.analysis += "browInnerUp: \(String(describing: browInnerUp?.decimalValue))"
+                self.analysis += "browInnerUp"
                 self.DLAudioPlayer?.soundIndex = 0
                 self.DLAudioPlayer?.volume = (browInnerUp?.floatValue ?? 0.0) - 0.06
                 self.browUp = true;
             }
         }
         
-//        if cheekPuff?.decimalValue ?? 0.0 > 0.1 {
-//            self.analysis += "Your cheeks are puffed. "
-//        }
-//
-//        if tongue?.decimalValue ?? 0.0 > 0.1 {
-//            self.analysis += "Don't stick your tongue out! "
-//        }
-        
-        if leftEyeBlink?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "Left Eye Blink"
+        if ((smileLeft?.decimalValue ?? 0.0) + (smileRight?.decimalValue ?? 0.0)) > 0.9 {
+            self.analysis += "You are smiling. "
+            self.BGAudioPlayer?.soundIndex = 0
+            self.smile = true
         }
         
-        if rightEyeBlink?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "Right Eye Blink"
+        if cheekPuff?.decimalValue ?? 0.0 > 0.1 {
+            self.analysis += "Your cheeks are puffed. "
+            self.BGAudioPlayer?.soundIndex = 1
+            self.cheekPuff = true
         }
         
-        if cheekSquintLeft?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "cheekSquintLeft"
-        }
-        if cheekSquintRight?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "cheekSquintRight"
-        }
+        
         if jawOpen?.decimalValue ?? 0.0 > 0.1{
             self.analysis += "jawOpen"
         }
-//        if browDownLeft?.decimalValue ?? 0.0 > 0.1{
-//            self.analysis += "browDownLeft: \(String(describing: browDownLeft?.decimalValue))"
-//        }
-//        if browDownRight?.decimalValue ?? 0.0 > 0.1{
-//            self.analysis += "browDownRight: \(String(describing: browDownRight?.decimalValue))"
-//        }
-//        if browInnerUp?.decimalValue ?? 0.0 > 0.1{
-//            self.analysis += "browInnerUp: \(String(describing: browInnerUp?.decimalValue))"
-//        }
-        if browOuterUpLeft?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "browOuterUpLeft: \(String(describing: browOuterUpLeft?.decimalValue))"
-        }
-        if browOuterUpRight?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "browOuterUpRight: \(String(describing: browOuterUpRight?.decimalValue))"
-        }
         
-        if noseSneerLeft?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "noseSneerLeft: \(String(describing: noseSneerLeft?.decimalValue))"
-        }
-        if noseSneerRight?.decimalValue ?? 0.0 > 0.1{
-            self.analysis += "noseSneerRight: \(String(describing: noseSneerRight?.decimalValue))"
-        }
     }
     
-//    func playAudio(){
-//        if (smile && !play){
-//            self.DLplayer = loadBundleAudio(bundleAudio[0])
-//            print("DLplayer", DLplayer as Any)
-//            // Loop indefinitely
-//            self.DLplayer?.numberOfLoops = 0
-//            self.DLplayer?.play()
-//            self.play = true
-//            print(DLplayer?.isPlaying)
-//            print("it should play sth")
-//        }
-//        if(DLplayer?.isPlaying == false){
-//            self.play = false
-//            self.smile = false
-//            print("stopped")
-//        }
-//    }
+    func audioPlay(){
+        if(eyeDown){
+            XLAudioPlayer?.playAudioWDelay()
+            eyeDown = false
+        }
+        if(eyeUp){
+            NBAudioPlayer?.playAudioWDelay()
+            eyeUp = false
+        }
+        if(browDown){
+            DLAudioPlayer?.playAudioWDelay()
+            browDown = false
+        }
+        if(browUp){
+            DLAudioPlayer?.playAudioWDelay()
+            browUp = false
+        }
+        if(smile){
+            BGAudioPlayer?.playAudioWDelay()
+            smile = false
+        }
+        if(cheekPuff){
+            BGAudioPlayer?.playAudioWDelay()
+            cheekPuff = false
+        }
+    }
     
     
 }

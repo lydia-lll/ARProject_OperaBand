@@ -46,7 +46,7 @@ class AudioPlayerModel{
         print(player?.isPlaying)
         print("it should play sth")
     }
-    func playAudioWDelay(){
+    func playAudioWDelay(delay: Double = 0.7){
         if(!isPlaying){
             self.player = loadBundleAudio(self.soundAssets[soundIndex])
             print("player", player as Any)
@@ -57,7 +57,7 @@ class AudioPlayerModel{
             print(player?.isPlaying)
             print("it should play sth")
             self.isPlaying = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                 //call any function
                 print("stopped")
                 self.isPlaying = false
