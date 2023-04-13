@@ -10,12 +10,22 @@ import Foundation
 import AVFoundation
 
 class AudioPlayerModel{
-    
-    var audioModel: AudioModel
+    var soundAssets: [String] = []
+    var soundIndex = 0
+    var pitch: Float
+    var volume: Float
+    var speed: Float
+//    var audioModel: AudioModel
     var player: AVAudioPlayer? = nil
-    init(audioModel: AudioModel){
-        self.audioModel = audioModel
+    var isPlaying = false
+    init(soundAssets: [String],pitch: Float, volume: Float, speed: Float){
+        self.soundAssets = soundAssets
+        self.pitch = pitch
+        self.volume = volume
+        self.speed = speed
+//        self.audioModel = AudioModel
     }
+    
     func loadBundleAudio(_ fileName:String) -> AVAudioPlayer? {
         let path = Bundle.main.path(forResource: fileName, ofType:nil)!
         let url = URL(fileURLWithPath: path)
@@ -27,16 +37,31 @@ class AudioPlayerModel{
         return nil
     }
     func playAudio(){
-        let bundleAudio = self.audioModel.soundAssets
-        self.player = loadBundleAudio(bundleAudio[0])
+        self.player = loadBundleAudio(self.soundAssets[soundIndex])
         print("player", player as Any)
         // Loop indefinitely
         self.player?.numberOfLoops = 0
+        self.player?.volume = volume
         self.player?.play()
         print(player?.isPlaying)
         print("it should play sth")
-        if(player?.isPlaying == false){
-            print("stopped")
+    }
+    func playAudioWDelay(){
+        if(!isPlaying){
+            self.player = loadBundleAudio(self.soundAssets[soundIndex])
+            print("player", player as Any)
+            // Loop indefinitely
+            self.player?.numberOfLoops = 0
+            self.player?.volume = volume
+            self.player?.play()
+            print(player?.isPlaying)
+            print("it should play sth")
+            self.isPlaying = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
+                //call any function
+                print("stopped")
+                self.isPlaying = false
+            }
         }
     }
 }
