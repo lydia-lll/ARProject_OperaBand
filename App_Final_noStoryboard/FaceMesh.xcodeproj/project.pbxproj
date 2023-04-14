@@ -16,6 +16,7 @@
 		0BB3E12829E7A670003914A7 /* DLlow.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E12329E7A670003914A7 /* DLlow.wav */; };
 		0BB3E12A29E7B24F003914A7 /* xiaoLuo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E12929E7B24F003914A7 /* xiaoLuo.wav */; };
 		0BB3E12C29E7B255003914A7 /* naoBo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0BB3E12B29E7B255003914A7 /* naoBo.wav */; };
+		0BB3E12F29E9A34E003914A7 /* AudioIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E12E29E9A34E003914A7 /* AudioIconView.swift */; };
 		8B7D4E392221CA4800E0E448 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7D4E382221CA4800E0E448 /* Coordinator.swift */; };
 		8B7D4E3E2221CA4F00E0E448 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B7D4E3D2221CA4F00E0E448 /* Assets.xcassets */; };
 		ABB7C42029AF54F500711661 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB7C41E29AF54F500711661 /* ContentView.swift */; };
@@ -32,6 +33,7 @@
 		0BB3E12329E7A670003914A7 /* DLlow.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = DLlow.wav; sourceTree = "<group>"; };
 		0BB3E12929E7B24F003914A7 /* xiaoLuo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = xiaoLuo.wav; sourceTree = "<group>"; };
 		0BB3E12B29E7B255003914A7 /* naoBo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = naoBo.wav; sourceTree = "<group>"; };
+		0BB3E12E29E9A34E003914A7 /* AudioIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioIconView.swift; sourceTree = "<group>"; };
 		8B7D4E312221CA4800E0E448 /* FaceMesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceMesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B7D4E382221CA4800E0E448 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		8B7D4E3D2221CA4F00E0E448 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */,
 				8B7D4E3D2221CA4F00E0E448 /* Assets.xcassets */,
 				8B7D4E422221CA4F00E0E448 /* Info.plist */,
+				0BB3E12E29E9A34E003914A7 /* AudioIconView.swift */,
 			);
 			path = FaceMesh;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 				ABB7C42029AF54F500711661 /* ContentView.swift in Sources */,
 				8B7D4E392221CA4800E0E448 /* Coordinator.swift in Sources */,
 				0BB3E11C29E76871003914A7 /* AudioModel.swift in Sources */,
+				0BB3E12F29E9A34E003914A7 /* AudioIconView.swift in Sources */,
 				ABB7C42129AF54F500711661 /* FaceMeshApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
