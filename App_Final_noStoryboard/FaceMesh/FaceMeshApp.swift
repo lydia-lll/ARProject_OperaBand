@@ -9,9 +9,10 @@ import SwiftUI
 
 @main
 struct FaceMeshApp: App {
+    @StateObject var audioRecorder = AudioRecorder()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(audioRecorder)
         }
     }
 }
