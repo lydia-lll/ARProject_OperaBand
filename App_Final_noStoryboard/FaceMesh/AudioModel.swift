@@ -7,19 +7,7 @@
 //
 
 import Foundation
-//class AudioModel{
-//    var soundAssets: [String] = []
-//    var pitch: Float
-//    var volume: Float
-//    var speed: Float
-//
-//    init(soundAssets: [String] = [],pitch: Float, volume: Float, speed: Float){
-//        self.soundAssets = soundAssets
-//        self.pitch = pitch
-//        self.volume = volume
-//        self.speed = speed
-//    }
-//}
+
 class AudioModel{
     let DLbundleAudio = [
         "DLlowShort.wav",
