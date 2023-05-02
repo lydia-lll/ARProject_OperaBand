@@ -12,7 +12,7 @@ struct FaceMeshApp: App {
     @StateObject var audioRecorder = AudioRecorder()
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(audioRecorder)
+            ContentView()
         }
     }
 }

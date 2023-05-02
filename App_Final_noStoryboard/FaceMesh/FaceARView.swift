@@ -1,21 +1,13 @@
-//
-//  FaceARView.swift
-//  FaceMesh
-//
-//  Created by ldy on 4/16/23.
-//  Copyright © 2023 AppCoda. All rights reserved.
-//
-
 import SwiftUI
 import ARKit
 import SceneKit
+import AVFoundation
+import Combine
 
 struct FaceARView: UIViewRepresentable {
     typealias UIViewType = ARSCNView
-    @Binding var analysis: String
-    @Binding var orientation: String
-    @Binding var nowPlaying: [String:Bool]
-    @Binding var headUp: Bool
+    @EnvironmentObject var faceARModel: FaceARModel
+    
     var view:ARSCNView
     
     func makeUIView(context: Context) -> ARSCNView {
@@ -27,18 +19,7 @@ struct FaceARView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        let cdr = Coordinator(self.view)
-        cdr.reportChange = {
-            analysis = cdr.analysis
-            nowPlaying = cdr.nowPlaying
-            orientation = cdr.faceOrientation
-            headUp = cdr.headUp
-        }
+        let cdr = Coordinator(self.view, faceARModel: faceARModel)
         return cdr
     }
 }
-//struct FaceARView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        FaceARView()
-//    }
-//}

@@ -15,6 +15,12 @@
 		0B5B407729ECC88F00AB3975 /* xiaoLuo.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B5B407029ECC88F00AB3975 /* xiaoLuo.wav */; };
 		0B5B407829ECC88F00AB3975 /* Gu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B5B407129ECC88F00AB3975 /* Gu.wav */; };
 		0B5B407929ECC88F00AB3975 /* banGu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 0B5B407229ECC88F00AB3975 /* banGu.wav */; };
+		0B5CCC8C29F8654A00FA7D55 /* FaceARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC8B29F8654A00FA7D55 /* FaceARModel.swift */; };
+		0B5CCC8E29F8657B00FA7D55 /* InstructionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC8D29F8657B00FA7D55 /* InstructionView.swift */; };
+		0B5CCC9029F865AE00FA7D55 /* MaskBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC8F29F865AE00FA7D55 /* MaskBtnView.swift */; };
+		0B5CCC9229F865CD00FA7D55 /* MaskIntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC9129F865CD00FA7D55 /* MaskIntroView.swift */; };
+		0B5CCC9429F865FC00FA7D55 /* MaskRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC9329F865FC00FA7D55 /* MaskRecordView.swift */; };
+		0B5CCC9629F8662200FA7D55 /* RecordBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5CCC9529F8662200FA7D55 /* RecordBtnView.swift */; };
 		0BB3E11C29E76871003914A7 /* AudioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E11B29E76871003914A7 /* AudioModel.swift */; };
 		0BB3E11E29E771DD003914A7 /* AudioPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */; };
 		0BB3E15F29EC9F4A003914A7 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB3E15929EC9F4A003914A7 /* AudioRecorder.swift */; };
@@ -39,6 +45,12 @@
 		0B5B407029ECC88F00AB3975 /* xiaoLuo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = xiaoLuo.wav; sourceTree = "<group>"; };
 		0B5B407129ECC88F00AB3975 /* Gu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Gu.wav; sourceTree = "<group>"; };
 		0B5B407229ECC88F00AB3975 /* banGu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = banGu.wav; sourceTree = "<group>"; };
+		0B5CCC8B29F8654A00FA7D55 /* FaceARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceARModel.swift; sourceTree = "<group>"; };
+		0B5CCC8D29F8657B00FA7D55 /* InstructionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionView.swift; sourceTree = "<group>"; };
+		0B5CCC8F29F865AE00FA7D55 /* MaskBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskBtnView.swift; sourceTree = "<group>"; };
+		0B5CCC9129F865CD00FA7D55 /* MaskIntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskIntroView.swift; sourceTree = "<group>"; };
+		0B5CCC9329F865FC00FA7D55 /* MaskRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaskRecordView.swift; sourceTree = "<group>"; };
+		0B5CCC9529F8662200FA7D55 /* RecordBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordBtnView.swift; sourceTree = "<group>"; };
 		0BB3E11B29E76871003914A7 /* AudioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioModel.swift; sourceTree = "<group>"; };
 		0BB3E11D29E771DD003914A7 /* AudioPlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerModel.swift; sourceTree = "<group>"; };
 		0BB3E15929EC9F4A003914A7 /* AudioRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -118,6 +130,12 @@
 				0BB3E15C29EC9F4A003914A7 /* RecordingsList.swift */,
 				0BB3E16529ECB0FF003914A7 /* FaceARView.swift */,
 				0B5B406A29ECB98700AB3975 /* AudioIconView.swift */,
+				0B5CCC8B29F8654A00FA7D55 /* FaceARModel.swift */,
+				0B5CCC8D29F8657B00FA7D55 /* InstructionView.swift */,
+				0B5CCC8F29F865AE00FA7D55 /* MaskBtnView.swift */,
+				0B5CCC9129F865CD00FA7D55 /* MaskIntroView.swift */,
+				0B5CCC9329F865FC00FA7D55 /* MaskRecordView.swift */,
+				0B5CCC9529F8662200FA7D55 /* RecordBtnView.swift */,
 			);
 			path = FaceMesh;
 			sourceTree = "<group>";
@@ -200,18 +218,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BB3E16329EC9F4A003914A7 /* Helper.swift in Sources */,
+				0B5CCC9429F865FC00FA7D55 /* MaskRecordView.swift in Sources */,
+				0B5CCC8C29F8654A00FA7D55 /* FaceARModel.swift in Sources */,
 				0BB3E16629ECB0FF003914A7 /* FaceARView.swift in Sources */,
 				0BB3E11E29E771DD003914A7 /* AudioPlayerModel.swift in Sources */,
 				0B5B406B29ECB98700AB3975 /* AudioIconView.swift in Sources */,
 				0BB3E16129EC9F4A003914A7 /* Extensions.swift in Sources */,
 				0BB3E16429EC9F4A003914A7 /* RecordingDataModel.swift in Sources */,
+				0B5CCC9029F865AE00FA7D55 /* MaskBtnView.swift in Sources */,
 				0BB3E15F29EC9F4A003914A7 /* AudioRecorder.swift in Sources */,
 				ABB7C42029AF54F500711661 /* ContentView.swift in Sources */,
 				0BB3E16029EC9F4A003914A7 /* AudioPlayer.swift in Sources */,
 				8B7D4E392221CA4800E0E448 /* Coordinator.swift in Sources */,
 				0BB3E11C29E76871003914A7 /* AudioModel.swift in Sources */,
+				0B5CCC9229F865CD00FA7D55 /* MaskIntroView.swift in Sources */,
 				0BB3E16229EC9F4A003914A7 /* RecordingsList.swift in Sources */,
 				ABB7C42129AF54F500711661 /* FaceMeshApp.swift in Sources */,
+				0B5CCC8E29F8657B00FA7D55 /* InstructionView.swift in Sources */,
+				0B5CCC9629F8662200FA7D55 /* RecordBtnView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
