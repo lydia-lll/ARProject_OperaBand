@@ -1,7 +1,7 @@
 # FinalProject_OperaBand
 
 ### Preview
-![preview](https://github.com/lydia-lll/FinalProject_OperaBand/issues/3#issue-1708775409)
+![App final pre](https://github.com/lydia-lll/FinalProject_OperaBand/assets/86812182/1645dbe6-fd47-4649-8c8e-8d8251a45b85)
 ### Instructions
 
 - Open the app and allow access to your camera and microphone.
