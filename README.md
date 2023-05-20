@@ -1,5 +1,7 @@
 # FinalProject_OperaBand
 
+一款AR京剧APP，用表情与面部肌肉控制多种京剧武场打击乐，点头切换生旦净丑四种面部滤镜，通过创新交互方式为中国传统艺术注入新的活力
+
 ### Preview
 ![App final pre](https://github.com/lydia-lll/FinalProject_OperaBand/assets/86812182/1645dbe6-fd47-4649-8c8e-8d8251a45b85)
 ### Instructions
